@@ -17,5 +17,8 @@ VOLUME ["/data/db"]
 # Define working directory.
 WORKDIR /data
 
+# Expose port
+EXPOSE 27017
+
 # Define default command.
 CMD ["mongod"]

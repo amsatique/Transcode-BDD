@@ -11,6 +11,10 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10 && \
     echo "mongodb-org-mongos hold" | dpkg --set-selections && \
     echo "mongodb-org-tools hold" | dpkg --set-selections
 
+COPY pushbullet.sh /pushbullet.sh
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /*.sh
+
 # Define mountable directories.
 VOLUME ["/data/db"]
 
@@ -19,6 +23,8 @@ WORKDIR /data
 
 # Expose port
 EXPOSE 27017
+
+ENTRYPOINT ["/entrypoint.sh"]
 
 # Define default command.
 CMD ["mongod"]

@@ -1,5 +1,9 @@
 FROM ubuntu:latest
 
+# Installing system dependencies
+RUN apt-get update && \
+    apt-get -y install curl
+
 # Install MongoDB.
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10 && \
     echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list && \
@@ -13,6 +17,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10 && \
 
 COPY pushbullet.sh /pushbullet.sh
 COPY entrypoint.sh /entrypoint.sh
+
 RUN chmod +x /*.sh
 
 # Define mountable directories.
